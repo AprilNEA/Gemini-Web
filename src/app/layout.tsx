@@ -1,22 +1,25 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Inter } from "next/font/google";
 import "@/globals.css";
+import "@radix-ui/themes/styles.css";
+import { trpc } from "@/utils/trpc";
+import { Theme } from "@radix-ui/themes";
+import clsx from "clsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Gemini Web",
-  description: "Gemini Web",
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <title>Gemini Web</title>
+      </head>
+      <body className={clsx(inter.className)}>
+        <Theme className="h-screen">{children}</Theme>
+      </body>
     </html>
   );
 }
+
+export default trpc.withTRPC(RootLayout);
