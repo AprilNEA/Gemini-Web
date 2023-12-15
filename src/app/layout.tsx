@@ -4,8 +4,9 @@ import { Inter } from "next/font/google";
 import "@/globals.css";
 import "@radix-ui/themes/styles.css";
 import { trpc } from "@/utils/trpc";
-import { Theme } from "@radix-ui/themes";
+import { Separator, Theme } from "@radix-ui/themes";
 import clsx from "clsx";
+import Sidebar from "@/components/sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,13 @@ function RootLayout({ children }: { children: React.ReactNode }) {
         <title>Gemini Web</title>
       </head>
       <body className={clsx(inter.className)}>
-        <Theme className="h-screen">{children}</Theme>
+        <Theme accentColor="gray" grayColor="slate">
+          <div className="h-screen flex flex-row">
+            <Sidebar />
+            <Separator orientation="vertical" size="4" />
+            <div className="grow p-4">{children}</div>
+          </div>
+        </Theme>
       </body>
     </html>
   );

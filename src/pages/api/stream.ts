@@ -21,14 +21,19 @@ export default async function handler(
 
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-  const result = await model.generateContentStream([prompt]);
-  stream.on("message", function (event, data) {
-    res.write(`data: ${data}\n\n`); // <- the format here is important!
-  });
+  try {
+    const result = await model.generateContentStream([prompt]);
 
-  for await (const chunk of result.stream) {
-    stream.emit("message", "data", JSON.stringify(chunk.text()));
+    stream.on("message", function (event, data) {
+      res.write(`data: ${data}\n\n`); // <- the format here is important!
+    });
+
+    for await (const chunk of result.stream) {
+      stream.emit("message", "data", JSON.stringify(chunk.text()));
+    }
+
+    res.end("done\n");
+  } catch (e) {
+    res.status(500);
   }
-
-  res.end("done\n");
 }
