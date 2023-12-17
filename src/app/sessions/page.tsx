@@ -2,7 +2,7 @@
 
 import { ChatMessage, useAppStore } from "@/store";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { fetchEventSource } from "@fortaine/fetch-event-source";
 import { useIsClient } from "foxact/use-is-client";
 import { Avatar, Button, Card, Flex, Text, TextArea } from "@radix-ui/themes";
@@ -14,13 +14,34 @@ import {
 } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useRouter } from "next/navigation";
 
+const shouldSubmit = (e: KeyboardEvent) => {
+  if (e.key !== "Enter") return false;
+
+  return !e.shiftKey;
+};
+
 function ChatHistory({ messages }: { messages: ChatMessage[] }) {
+  const latestMessageRef = useRef<HTMLDivElement>(null);
+
+  // auto scroll
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      const dom = latestMessageRef.current;
+      if (dom) {
+        dom.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+      }
+    }, 500);
+  });
+
   return (
     <Flex
       direction="column"
       justify="start"
       align="center"
-      className="grow w-full overflow-y-auto mb-2"
+      className="grow w-full overflow-y-auto hide-scrollbar mb-2"
       gap="2"
     >
       {messages.map((message, index) => (
@@ -56,6 +77,9 @@ function ChatHistory({ messages }: { messages: ChatMessage[] }) {
           </div>
         </Flex>
       ))}
+      <div ref={latestMessageRef} style={{ opacity: 0, height: "2em" }}>
+        -
+      </div>
     </Flex>
   );
 }
@@ -77,13 +101,23 @@ export default function SessionPage() {
     if (!currentSessionId) return router.push("/");
   }, [currentSessionId]);
 
-  async function send() {
+  // check if you should send message
+  const onInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.nativeEvent.isComposing) return;
+    if (shouldSubmit(e.nativeEvent)) {
+      onUserSubmit().then((r) => {});
+      e.preventDefault();
+    }
+  };
+
+  const onUserSubmit = async () => {
     if (!currentSessionId || !currentSession) return;
+
+    if (userInput.length <= 0) return;
 
     addMessageToSession(currentSessionId, { parts: userInput, role: "user" });
     addMessageToSession(currentSessionId, { parts: "", role: "model" });
     setUserInput("");
-
     await fetchEventSource("/api/stream", {
       method: "POST",
       headers: {
@@ -98,7 +132,7 @@ export default function SessionPage() {
         updateLastMessageInSession(currentSessionId, e.data);
       },
     });
-  }
+  };
 
   if (!useIsClient()) {
     return <div>Loading...</div>;
@@ -135,9 +169,10 @@ export default function SessionPage() {
         <TextArea
           value={userInput}
           className="grow"
+          onKeyDown={onInputKeyDown}
           onChange={(e) => setUserInput(e.target.value)}
         />
-        <Button onClick={send}>Send</Button>
+        <Button onClick={onUserSubmit}>Send</Button>
       </Flex>
     </Flex>
   );

@@ -33,9 +33,9 @@ export default async function handler(
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
   const chat = model.startChat({
     history: history,
-    generationConfig: {
-      maxOutputTokens: 100,
-    },
+    // generationConfig: {
+    //   maxOutputTokens: 100,
+    // },
   });
 
   try {
