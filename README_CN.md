@@ -1,8 +1,11 @@
 <h4 align="right"><strong>简体中文</strong> | <a href="./README_EN.md">
 English</a></h4>
-<p align="center">
-    <img src=https://s2.loli.net/2023/10/23/MLfhA2owPCacmyU.png width=138/>
-</p>
+
+[//]: # (<p align="center">)
+
+[//]: # (    <img src=https://s2.loli.net/2023/10/23/MLfhA2owPCacmyU.png width=138/>)
+
+[//]: # (</p>)
 <h1 align="center">Gemini Web</h1>
 <p align="center"><strong>与Gemini对话用户界面</strong></p>
 <div align="center">
