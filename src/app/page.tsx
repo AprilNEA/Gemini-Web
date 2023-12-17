@@ -3,6 +3,8 @@ import { Button, Flex } from "@radix-ui/themes";
 import { Model, useAppStore } from "@/store";
 import { useRouter } from "next/navigation";
 import { useIsClient } from "foxact/use-is-client";
+import Loading from "@/app/loading";
+import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
@@ -10,16 +12,17 @@ export default function Home() {
 
   function newChat() {
     createNewSession(Model.GeminiPro);
-    router.push("session");
   }
 
   if (!useIsClient()) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
     <Flex direction="column" justify="center" align="center">
-      <Button onClick={newChat}>New Chat</Button>
+      <Link href="/sessions">
+        <Button onClick={newChat}>New Chat</Button>
+      </Link>
     </Flex>
   );
 }

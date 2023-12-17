@@ -11,7 +11,7 @@ export enum Model {
 
 export interface ChatMessage {
   role: "user" | "model";
-  content: string;
+  parts: string;
   createdAt: Date;
 }
 
@@ -83,8 +83,8 @@ export const useAppStore = create<AppStore>()(
           produce((draft: AppStore) => {
             const session = draft.sessions.find((s) => s.id === sessionId);
             if (session && session.messages.length > 0) {
-              session.messages[session.messages.length - 1].content =
-                session.messages[session.messages.length - 1].content +
+              session.messages[session.messages.length - 1].parts =
+                session.messages[session.messages.length - 1].parts +
                 JSON.parse(newContent);
             }
           }),

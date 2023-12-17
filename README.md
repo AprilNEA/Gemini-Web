@@ -19,6 +19,11 @@
 [Start](https://ai.xjt.lu) | [Document](https://manual.sku.moe/project/gemini-web) 
 </div>
 
+## Feature
+
+- Gemini Accessible from any location
+- Very simple configuration for quick enablement
+- 
 ## Project Status
 
 ![Alt](https://repobeats.axiom.co/api/embed/52983fcf56592460a1936a6a66bd77864dcdff18.svg "Repobeats analytics image")
@@ -28,7 +33,7 @@ News: *[Telegram Channel](https://t.me/AprilNEAChannel)*
 ## Contributors
 
 <a href="https://github.com/AprilNEA/ChatGPT-Admin-Web/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=AprilNEA/ChatGPT-Admin-Web" />
+  <img src="https://contrib.rocks/image?repo=AprilNEA/Gemini-Web" />
 </a>
 
 ## Donate

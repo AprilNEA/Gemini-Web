@@ -1,18 +1,24 @@
 import clsx from "clsx";
 import Link from "next/link";
 
-import { Separator, Strong, Text } from "@radix-ui/themes";
-import { useAppStore } from "@/store";
+import { Button, Separator, Strong, Text } from "@radix-ui/themes";
+import { Model, useAppStore } from "@/store";
 import Search from "@/components/sidebar/search";
 import packageMeta from "@/../package.json";
 import { useIsClient } from "foxact/use-is-client";
 import Setting from "@/components/sidebar/setting";
+import Loading from "@/app/loading";
 
 export default function Sidebar() {
-  const { sessions, currentSessionId, setCurrentSessionId } = useAppStore();
+  const { sessions, createNewSession, currentSessionId, setCurrentSessionId } =
+    useAppStore();
 
   if (!useIsClient()) {
-    return <div>Loading...</div>;
+    return <Loading />;
+  }
+
+  function newChat() {
+    createNewSession(Model.GeminiPro);
   }
 
   return (
@@ -25,6 +31,10 @@ export default function Sidebar() {
     >
       <Search />
       <Separator size="4" />
+      <Link href="/sessions" prefetch={true}>
+        <Button onClick={newChat}>New Chat</Button>
+      </Link>
+      <Separator size="4" />
       <div
         className={clsx(
           "w-full grow",
@@ -34,7 +44,7 @@ export default function Sidebar() {
         {sessions.map((session) => (
           <Link
             key={session.id}
-            href="/session"
+            href="/sessions"
             prefetch={true}
             onClick={() => setCurrentSessionId(session.id)}
             className={clsx(

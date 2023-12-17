@@ -37,7 +37,7 @@ function ChatHistory({ messages }: { messages: ChatMessage[] }) {
               {/*<Markdown>{message.content}</Markdown>*/}
               <Markdown
                 /* eslint-disable-next-line react/no-children-prop */
-                children={message.content.replace(/\n\n/g, "\n")}
+                children={message.parts.replace(/\n\n/g, "\n")}
                 components={{
                   code(props) {
                     const { children, className, node, ...rest } = props;
@@ -81,17 +81,11 @@ export default function SessionPage() {
   const [userInput, setUserInput] = useState("");
   const control = new AbortController();
 
-  // const mutation = trpc.chat.useMutation({
-  //   onSuccess: (data) => {
-  //     addMessageToSession({ id: nanoid(), text: data.text, role: "bot" });
-  //   },
-  // });
-
   async function send() {
-    if (!currentSessionId) return;
+    if (!currentSessionId || !currentSession) return;
 
-    addMessageToSession(currentSessionId, { content: userInput, role: "user" });
-    addMessageToSession(currentSessionId, { content: "", role: "model" });
+    addMessageToSession(currentSessionId, { parts: userInput, role: "user" });
+    addMessageToSession(currentSessionId, { parts: "", role: "model" });
     setUserInput("");
 
     await fetchEventSource("/api/stream", {
@@ -102,11 +96,8 @@ export default function SessionPage() {
       body: JSON.stringify({
         apiKey: apiKey,
         prompt: userInput,
+        history: [...currentSession.messages],
       }),
-      // signal: ctrl.signal,
-      // async onopen(response) {
-      //   console.log("onopen", await response.text());
-      // },
       onmessage(e) {
         updateLastMessageInSession(currentSessionId, e.data);
       },
