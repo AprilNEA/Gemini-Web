@@ -1,4 +1,4 @@
-<h4 align="right"><strong>简体中文</strong> | <a href="./README_EN.md">
+<h4 align="right"><strong>简体中文</strong> | <a href="./README.md">
 English</a></h4>
 
 [//]: # (<p align="center">)
