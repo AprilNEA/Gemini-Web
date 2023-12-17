@@ -16,6 +16,8 @@
     <img alt="twitter" src="https://img.shields.io/badge/follow-AprilNEA-green?style=flat-square&logo=Twitter">
 </a>
 
+<img src="https://hits.siyue.best/v1/hits?url=https://github.com/AprilNEA/Gemini-Web&border=square" />
+
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAprilNEA%2FGemini-Web&env=API_KET&envDescription=Get%20API%20Ket%20in%20Google%20AI%20Studio&envLink=https%3A%2F%2Fmakersuite.google.com%2Fapp%2Fapikey&demo-title=Gemini%20Web&demo-description=A%20UI%20interface%20for%20Gemini&demo-url=https%3A%2F%2Fai.xjt.lu)
 
 </div>
