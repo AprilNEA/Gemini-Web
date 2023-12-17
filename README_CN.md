@@ -11,17 +11,14 @@ English</a></h4>
 <div align="center">
     <a href="https://twitter.com/AprilNEA" target="_blank">
     <img alt="twitter" src="https://img.shields.io/badge/follow-AprilNEA-green?style=flat-square&logo=Twitter"></a>
-    <a href="https://t.me/ChatGPTAdminWebChannel" target="_blank">
+    <a href="https://t.me/AprilNEAChannel" target="_blank">
     <img alt="telegram" src="https://img.shields.io/badge/channel-telegram-blueviolet?style=flat-square&logo=Telegram"></a>
-    <a href="https://github.com/AprilNEA/ChatGPT-Admin-Web/commits" target="_blank">
-    <img alt="GitHub commit" src="https://img.shields.io/github/commit-activity/m/AprilNEA/ChatGPT-Admin-Web?style=flat-square"></a>
-    <a href="https://github.com/AprilNEA/ChatGPT-Admin-Web/issues?q=is%3Aissue+is%3Aclosed" target="_blank">
-    <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/AprilNEA/ChatGPT-Admin-Web.svg?style=flat-square"></a>
-<br/>    
+
 <img src="https://hits.siyue.best/v1/hits?url=https://github.com/AprilNEA/ChatGPT-Admin-Web&bgRight=000&bgLeft=000&border=square" />
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAprilNEA%2FGemini-Web&env=API_KET&envDescription=Get%20API%20Ket%20in%20Google%20AI%20Studio&envLink=https%3A%2F%2Fmakersuite.google.com%2Fapp%2Fapikey&demo-title=Gemini%20Web&demo-description=A%20UI%20interface%20for%20Gemini&demo-url=https%3A%2F%2Fai.xjt.lu)
+
 </div>
-<div align="left">快速开始与 Gemini 的对话</div></div>
 
 <div align="center">
 

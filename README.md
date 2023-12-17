@@ -8,22 +8,29 @@
 <h1 align="center">Gemini Web</h1>
 <p align="center"><strong>A UI to talk to Gemini</strong></p>
 <div align="center"> 
-<img src="https://hits.siyue.best/v1/hits?url=https://github.com/AprilNEA/Gemini-Web&bgRight=000&bgLeft=000&border=square" />
+<a href="https://t.me/AprilNEAChannel" target="_blank">
+    <img alt="telegram" src="https://img.shields.io/badge/channel-telegram-blueviolet?style=flat-square&logo=Telegram">
+</a>
+
+<a href="https://twitter.com/AprilNEA" target="_blank">
+    <img alt="twitter" src="https://img.shields.io/badge/follow-AprilNEA-green?style=flat-square&logo=Twitter">
+</a>
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAprilNEA%2FGemini-Web&env=API_KET&envDescription=Get%20API%20Ket%20in%20Google%20AI%20Studio&envLink=https%3A%2F%2Fmakersuite.google.com%2Fapp%2Fapikey&demo-title=Gemini%20Web&demo-description=A%20UI%20interface%20for%20Gemini&demo-url=https%3A%2F%2Fai.xjt.lu)
 
 </div>
-<div align="left">Play with Gemini quickly</div>
-
 
 <div align="center">
 
-[Start](https://ai.xjt.lu) | [Document](https://manual.sku.moe/project/gemini-web) 
+[Start](https://ai.xjt.lu) | [Document](https://manual.sku.moe/project/gemini-web)
 </div>
 
 ## Feature
 
 - Gemini Accessible from any location
 - Very simple configuration for quick enablement
-- 
+-
+
 ## Project Status
 
 ![Alt](https://repobeats.axiom.co/api/embed/52983fcf56592460a1936a6a66bd77864dcdff18.svg "Repobeats analytics image")
