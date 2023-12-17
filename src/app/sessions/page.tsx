@@ -2,7 +2,7 @@
 
 import { ChatMessage, useAppStore } from "@/store";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchEventSource } from "@fortaine/fetch-event-source";
 import { useIsClient } from "foxact/use-is-client";
 import { Avatar, Button, Card, Flex, Text, TextArea } from "@radix-ui/themes";
@@ -12,6 +12,7 @@ import {
   materialLight,
   materialDark,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { useRouter } from "next/navigation";
 
 function ChatHistory({ messages }: { messages: ChatMessage[] }) {
   return (
@@ -19,7 +20,7 @@ function ChatHistory({ messages }: { messages: ChatMessage[] }) {
       direction="column"
       justify="start"
       align="center"
-      className="grow w-full overflow-auto mb-2"
+      className="grow w-full overflow-y-auto mb-2"
       gap="2"
     >
       {messages.map((message, index) => (
@@ -31,38 +32,28 @@ function ChatHistory({ messages }: { messages: ChatMessage[] }) {
           gap="1"
           className="w-full h-fit"
         >
-          <Avatar size="2" radius="full" src="" fallback="G" />
-          <Card className="grow h-auto min-h-[20px]">
-            <Text className="whitespace-pre-line">
-              {/*<Markdown>{message.content}</Markdown>*/}
-              <Markdown
-                /* eslint-disable-next-line react/no-children-prop */
-                children={message.parts.replace(/\n\n/g, "\n")}
-                components={{
-                  code(props) {
-                    const { children, className, node, ...rest } = props;
-                    const match = /language-(\w+)/.exec(className || "");
-
-                    return match ? ( // @ts-ignore
-                      <SyntaxHighlighter
-                        {...rest}
-                        PreTag="div"
-                        className="rounded-xl"
-                        /* eslint-disable-next-line react/no-children-prop */
-                        children={String(children).replace(/\n$/, "")}
-                        language={match[1]}
-                        style={materialDark}
-                      />
-                    ) : (
-                      <code {...rest} className={className}>
-                        {children}
-                      </code>
-                    );
-                  },
-                }}
-              />
-            </Text>
-          </Card>
+          <div className="w-8">
+            {message.role === "model" && (
+              <Avatar size="2" radius="full" src="" fallback="G" />
+            )}
+          </div>
+          <div
+            className="grow"
+            style={{
+              maxWidth: "calc(100% - 4rem)",
+            }}
+          >
+            <Card className="w-full max-w-full">
+              <Markdown className="w-full max-w-full break-words whitespace-pre-line overflow-auto scrollbar scrollbar-thumb-gray-400">
+                {message.parts}
+              </Markdown>
+            </Card>
+          </div>
+          <div className="w-8">
+            {message.role === "user" && (
+              <Avatar size="2" radius="full" src="" fallback="U" />
+            )}
+          </div>
         </Flex>
       ))}
     </Flex>
@@ -70,6 +61,7 @@ function ChatHistory({ messages }: { messages: ChatMessage[] }) {
 }
 
 export default function SessionPage() {
+  const router = useRouter();
   const {
     apiKey,
     sessions,
@@ -80,6 +72,10 @@ export default function SessionPage() {
   const currentSession = sessions.find((s) => currentSessionId === s.id);
   const [userInput, setUserInput] = useState("");
   const control = new AbortController();
+
+  useEffect(() => {
+    if (!currentSessionId) return router.push("/");
+  }, [currentSessionId]);
 
   async function send() {
     if (!currentSessionId || !currentSession) return;
@@ -117,9 +113,18 @@ export default function SessionPage() {
       direction="column"
       justify="center"
       align="center"
-      className="h-full mx-auto max-w-2xl py-4"
+      className="h-full mx-auto max-w-3xl py-4"
     >
-      <ChatHistory messages={currentSession.messages} />
+      <ChatHistory
+        messages={[
+          {
+            role: "model",
+            parts: "I'm Gemini Pro, how can I help you?",
+            createdAt: new Date(),
+          },
+          ...currentSession.messages,
+        ]}
+      />
       <Flex
         direction="row"
         justify="center"

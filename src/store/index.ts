@@ -30,6 +30,7 @@ interface AppStore {
   currentSessionId: string | null;
   setCurrentSessionId: (sessionId: string | null) => void;
   createNewSession: (model: Model) => string;
+  deleteSession: (sessionId: string) => void;
   addMessageToSession: (
     sessionId: string,
     message: Omit<ChatMessage, "createdAt">,
@@ -68,6 +69,17 @@ export const useAppStore = create<AppStore>()(
         );
         get().setCurrentSessionId(newSessionId);
         return newSessionId;
+      },
+      deleteSession: (sessionId) => {
+        set(
+          // TODO delete directly
+          produce((draft: AppStore) => {
+            draft.sessions = draft.sessions.filter((s) => s.id !== sessionId);
+          }),
+        );
+        if (get().currentSessionId === sessionId) {
+          get().setCurrentSessionId(null);
+        }
       },
       addMessageToSession: (sessionId, message) =>
         set(
