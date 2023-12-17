@@ -115,7 +115,9 @@ export default function Sidebar() {
       <div className="w-full px-2 py-1 flex flex-row justify-between items-center">
         <Text as="p" size="1">
           <Strong>
-            <Link href="https://github.com/AprilNEA/Gemini-Web">DevUtils</Link>{" "}
+            <Link href="https://github.com/AprilNEA/Gemini-Web">
+              Gemini-Web
+            </Link>{" "}
             by{" "}
             <Link href="https://sku.moe" prefetch={true}>
               AprilNEA

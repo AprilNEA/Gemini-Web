@@ -27,11 +27,14 @@
 [Start](https://ai.xjt.lu) | [Document](https://manual.sku.moe/project/gemini-web)
 </div>
 
+## Shoucase
+
+![showcase.png](https://s2.loli.net/2023/12/18/Mnums53oOdEDtGi.png)
+
 ## Feature
 
 - Gemini Accessible from any location
 - Very simple configuration for quick enablement
--
 
 ## Project Status
 
